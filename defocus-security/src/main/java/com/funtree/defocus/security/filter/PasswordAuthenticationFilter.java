@@ -34,9 +34,8 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        Account account = null;
         try {
-            account = new ObjectMapper().readValue(request.getInputStream(), Account.class);
+            Account account = new ObjectMapper().readValue(request.getInputStream(), Account.class);
             Authentication authentication = new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword());
             return this.authenticationManager.authenticate(authentication);
         } catch (IOException e) {
@@ -45,12 +44,11 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)  {
         Account account = (Account) authResult.getPrincipal();
-        Map<String, Object> claims = new HashMap<String, Object>();
+        Map<String, Object> claims = new HashMap<>();
         claims.put("subject", account.getId());
-        claims.put("roles",
-                account.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        claims.put("roles", account.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         response.addHeader(jwtUtil.getTokenHeader(), jwtUtil.generateToken(claims));
     }
 }

@@ -1,4 +1,4 @@
-package com.funtree.defocus.entity;
+package com.funtree.defocus.app.entity;
 
 public class SystemConfig {
     private int version;

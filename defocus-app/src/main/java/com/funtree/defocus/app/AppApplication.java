@@ -1,13 +1,11 @@
-package com.funtree.defocus;
+package com.funtree.defocus.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DefocusApplication {
-
+public class AppApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DefocusApplication.class, args);
+        SpringApplication.run(AppApplication.class, args);
     }
-
 }
