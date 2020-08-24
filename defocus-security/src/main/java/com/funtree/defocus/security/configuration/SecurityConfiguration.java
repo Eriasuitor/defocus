@@ -1,6 +1,7 @@
 package com.funtree.defocus.security.configuration;
 
 import com.funtree.defocus.security.filter.PasswordAuthenticationFilter;
+import com.funtree.defocus.security.filter.TokenAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .addFilter(new PasswordAuthenticationFilter(authenticationManager()))
+                .addFilter(new TokenAuthorizationFilter(authenticationManager()))
 //        .addFilter();
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

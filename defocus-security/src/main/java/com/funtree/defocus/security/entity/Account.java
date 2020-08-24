@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(indexes = { @Index(columnList = "username", unique = true)})
+@Table(indexes = { @Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
 public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
